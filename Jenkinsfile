@@ -1,6 +1,9 @@
 #!groovy
 
 /* Only keep the 10 most recent builds. */
+pipeline {
+  agent {label 'slave_node'}
+  
 properties([[$class: 'BuildDiscarderProperty',
                 strategy: [$class: 'LogRotator', numToKeepStr: '10']]])
 
@@ -28,6 +31,7 @@ stage ('Build') {
         reportFiles: 'index.html',
         reportName: "RCov Report"
       ])
-
+ 
+    }
   }
 }
